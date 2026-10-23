@@ -67,6 +67,13 @@ npm run typecheck
 npm run build
 ```
 
+For a faster backend loop, use `npm run test:go`. The integration and network
+contract suites can be run independently with `npm run test:go:integration` and
+`npm run test:go:contract`; `npm run test:go:all` runs every Go suite.
+
+The backend package boundaries and dependency rules are documented in
+[`ARCHITECTURE.md`](ARCHITECTURE.md).
+
 The Go backend listens on port `3050`. The React frontend uses Vite during
 development and is embedded from `client/dist` in the production container.
 

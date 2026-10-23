@@ -1,4 +1,4 @@
-package httpapi
+package httpapi_test
 
 import (
 	"bytes"
@@ -12,21 +12,18 @@ import (
 	"testing"
 	"time"
 
+	"github.com/alty-oss/open-drive/tests/testkit"
 	"github.com/coder/websocket"
 	"github.com/coder/websocket/wsjson"
 )
 
 func TestBlackBoxHTTPAndWebSocketContract(t *testing.T) {
-	cfg := testConfig(t)
-	s, err := New(cfg)
+	cfg := testkit.Config(t)
+	s, err := testkit.New(t, cfg)
 	if err != nil {
 		t.Fatal(err)
 	}
 	defer s.Close()
-	if err := s.Index.Reconcile(t.Context()); err != nil {
-		t.Fatal(err)
-	}
-
 	server := httptest.NewServer(s.Handler())
 	defer server.Close()
 	jar, err := cookiejar.New(nil)
@@ -66,6 +63,19 @@ func TestBlackBoxHTTPAndWebSocketContract(t *testing.T) {
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
+	badHeaders := wsHeaders.Clone()
+	badHeaders.Set("Origin", "https://evil.example")
+	badConn, badResponse, badErr := websocket.Dial(ctx, wsURL, &websocket.DialOptions{HTTPHeader: badHeaders})
+	if badConn != nil {
+		badConn.CloseNow()
+	}
+	if badResponse != nil {
+		defer badResponse.Body.Close()
+	}
+	if badErr == nil || badResponse == nil || badResponse.StatusCode != http.StatusForbidden {
+		t.Fatalf("cross-origin websocket: err=%v status=%v", badErr, responseStatus(badResponse))
+	}
+
 	conn, response, err := websocket.Dial(ctx, wsURL, &websocket.DialOptions{HTTPHeader: wsHeaders})
 	if err != nil {
 		if response != nil {
@@ -115,4 +125,11 @@ func TestBlackBoxHTTPAndWebSocketContract(t *testing.T) {
 	if event.Type != "file-change" || event.Event != "new-file" || event.Path != "" || event.OriginID != "contract-client" {
 		t.Fatalf("unexpected websocket event: %+v", event)
 	}
+}
+
+func responseStatus(response *http.Response) any {
+	if response == nil {
+		return nil
+	}
+	return response.StatusCode
 }

@@ -1,4 +1,4 @@
-package watch
+package watch_test
 
 import (
 	"context"
@@ -8,10 +8,11 @@ import (
 	"testing"
 	"time"
 
-	"open-drive/internal/database"
-	"open-drive/internal/index"
-	"open-drive/internal/realtime"
-	"open-drive/internal/storage"
+	"github.com/alty-oss/open-drive/internal/database"
+	"github.com/alty-oss/open-drive/internal/index"
+	"github.com/alty-oss/open-drive/internal/realtime"
+	"github.com/alty-oss/open-drive/internal/storage"
+	"github.com/alty-oss/open-drive/internal/watch"
 )
 
 func TestWatcherReconcilesExternalChanges(t *testing.T) {
@@ -33,7 +34,7 @@ func TestWatcherReconcilesExternalChanges(t *testing.T) {
 				t.Fatal(err)
 			}
 
-			watcher := New(store, idx, realtime.New(), polling)
+			watcher := watch.New(store, idx, realtime.New(), polling)
 			ctx, cancel := context.WithCancel(context.Background())
 			defer cancel()
 			done := make(chan error, 1)

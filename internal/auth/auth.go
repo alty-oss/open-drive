@@ -13,8 +13,8 @@ import (
 	"sync"
 	"time"
 
-	"open-drive/internal/config"
-	"open-drive/internal/database"
+	"github.com/alty-oss/open-drive/internal/config"
+	"github.com/alty-oss/open-drive/internal/database"
 )
 
 type Auth struct {

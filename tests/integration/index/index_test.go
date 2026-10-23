@@ -1,4 +1,4 @@
-package index
+package index_test
 
 import (
 	"context"
@@ -6,8 +6,9 @@ import (
 	"path/filepath"
 	"testing"
 
-	"open-drive/internal/database"
-	"open-drive/internal/storage"
+	"github.com/alty-oss/open-drive/internal/database"
+	"github.com/alty-oss/open-drive/internal/index"
+	"github.com/alty-oss/open-drive/internal/storage"
 )
 
 func TestSearchCursorDoesNotDuplicateItems(t *testing.T) {
@@ -27,7 +28,7 @@ func TestSearchCursorDoesNotDuplicateItems(t *testing.T) {
 			t.Fatal(err)
 		}
 	}
-	idx := &Index{DB: db, Store: store}
+	idx := &index.Index{DB: db, Store: store}
 	if err := idx.Reconcile(context.Background()); err != nil {
 		t.Fatal(err)
 	}
@@ -38,9 +39,6 @@ func TestSearchCursorDoesNotDuplicateItems(t *testing.T) {
 	}
 	if len(first.Items) != 1 || first.NextCursor == nil {
 		t.Fatalf("first page=%+v", first)
-	}
-	if _, decodeErr := decodeSearchCursor(*first.NextCursor, "txt", ""); decodeErr != nil {
-		t.Fatal(decodeErr)
 	}
 	second, err := idx.Search(context.Background(), "txt", "", *first.NextCursor, 1)
 	if err != nil {

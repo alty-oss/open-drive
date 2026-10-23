@@ -11,9 +11,9 @@ import (
 
 	"github.com/fsnotify/fsnotify"
 
-	"open-drive/internal/index"
-	"open-drive/internal/realtime"
-	"open-drive/internal/storage"
+	"github.com/alty-oss/open-drive/internal/index"
+	"github.com/alty-oss/open-drive/internal/realtime"
+	"github.com/alty-oss/open-drive/internal/storage"
 )
 
 type Watcher struct {
