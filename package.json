@@ -1,0 +1,28 @@
+{
+  "name": "open-drive",
+  "version": "1.0.0",
+  "description": "",
+  "main": "cmd/open-drive/main.go",
+  "scripts": {
+    "start": "go run ./cmd/open-drive",
+    "dev": "concurrently -n server,client -c cyan,magenta \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "go run ./cmd/open-drive",
+    "dev:client": "cd client && npm run dev",
+    "build": "cd client && npm run build",
+    "test": "npm run test:go && npm run test:client && npm run test:tones",
+    "test:go": "go test ./cmd/... ./internal/...",
+    "test:tones": "node client/scripts/check-tones.mjs",
+    "contract:probe": "node scripts/contract-probe.mjs",
+    "typecheck": "cd client && ./node_modules/.bin/tsc --noEmit",
+    "postinstall": "npm install --prefix client",
+    "test:client": "node --experimental-strip-types --import ./client/test/setup/register.mjs --test \"client/test/**/*.test.js\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {},
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

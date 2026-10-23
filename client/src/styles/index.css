@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@source "../";
+
+
+@source inline("right-2 bottom-2 w-[calc(100vw-16px)] max-h-[58dvh] sm:right-4 sm:bottom-4 sm:w-[min(390px,calc(100vw-32px))] sm:max-h-[min(62vh,500px)]");
+@import "./theme.css";
+@import "./animations.css";
+@import "./base.css";
+@import "./components.css";
+@import "./vendor.css";

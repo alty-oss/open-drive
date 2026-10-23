@@ -1,0 +1,19 @@
+name: open-drive
+
+services:
+  open-drive:
+    build: .
+    ports:
+      - "3050:3050"
+    env_file:
+      - .env
+    volumes:
+      - ./storage:/app/storage
+    mem_reservation: 512m
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "--quiet", "http://127.0.0.1:3050/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s

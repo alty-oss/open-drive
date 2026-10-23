@@ -1,0 +1,8 @@
+node_modules
+client/node_modules
+client/dist
+/uploads
+!client/src/features/uploads
+!client/src/features/uploads/**
+.env
+.git

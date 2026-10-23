@@ -1,0 +1,29 @@
+{
+  "categories": {
+    "image": ["jpg", "jpeg", "png", "gif", "webp", "svg", "bmp", "ico", "avif", "tif", "tiff"],
+    "video": ["mp4", "webm", "ogg", "mov", "mkv", "avi", "wmv", "flv", "m4v"],
+    "audio": ["mp3", "wav", "flac", "aac", "m4a", "wma", "opus"],
+    "archive": ["zip", "rar", "7z", "tar", "gz", "bz2", "xz", "iso"],
+    "code": [
+      "js", "mjs", "cjs", "jsx", "ts", "mts", "cts", "tsx", "json",
+      "html", "htm", "css", "scss", "less", "md", "markdown", "py",
+      "java", "c", "cpp", "h", "hpp", "cs", "go", "rs", "rb", "php",
+      "xml", "yml", "yaml", "toml", "ini", "conf", "cfg", "sh", "bash",
+      "zsh", "bat", "ps1", "sql", "graphql", "gql", "env", "gitignore",
+      "dockerignore", "editorconfig", "dockerfile", "makefile"
+    ],
+    "pdf": ["pdf"],
+    "text": ["txt", "log", "csv", "doc", "docx", "xls", "xlsx", "ppt", "pptx", "odt", "ods", "odp", "rtf"]
+  },
+  "plainTextExtensions": ["txt", "log", "csv", "rtf", "svg"],
+  "markdownExtensions": ["md", "markdown"],
+  "previewExtensions": {
+    "docx": ["docx"],
+    "font": ["ttf", "otf", "woff", "woff2"],
+    "notebook": ["ipynb"]
+  },
+  "subtitleExtensions": ["srt", "vtt"],
+  "specialFilenames": [
+    "dockerfile", "makefile", ".env", ".gitignore", ".dockerignore", ".editorconfig"
+  ]
+}

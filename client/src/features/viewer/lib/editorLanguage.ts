@@ -1,0 +1,53 @@
+const LANGUAGE_MAP: Record<string, string> = {
+  js: "javascript",
+  mjs: "javascript",
+  cjs: "javascript",
+  jsx: "javascript",
+  ts: "typescript",
+  mts: "typescript",
+  cts: "typescript",
+  tsx: "typescript",
+  json: "json",
+  html: "html",
+  htm: "html",
+  css: "css",
+  scss: "scss",
+  less: "less",
+  md: "markdown",
+  markdown: "markdown",
+  py: "python",
+  java: "java",
+  c: "c",
+  h: "c",
+  cpp: "cpp",
+  hpp: "cpp",
+  cs: "csharp",
+  go: "go",
+  rs: "rust",
+  rb: "ruby",
+  php: "php",
+  xml: "xml",
+  svg: "xml",
+  yml: "yaml",
+  yaml: "yaml",
+  toml: "ini",
+  ini: "ini",
+  conf: "ini",
+  cfg: "ini",
+  sh: "shell",
+  bash: "shell",
+  zsh: "shell",
+  bat: "bat",
+  ps1: "powershell",
+  sql: "sql",
+  graphql: "graphql",
+  gql: "graphql",
+  dockerfile: "dockerfile",
+};
+
+export function getCodeMirrorLanguage(name: string): string {
+  const lower = name.toLowerCase();
+  if (LANGUAGE_MAP[lower]) return LANGUAGE_MAP[lower];
+  const ext = lower.split(".").pop() || "";
+  return LANGUAGE_MAP[ext] || "plaintext";
+}

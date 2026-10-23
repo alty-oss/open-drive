@@ -1,0 +1,67 @@
+@layer components {
+
+
+
+
+
+  @media (hover: hover) and (pointer: fine) and (min-width: 768px) {
+    .tooltip-anchor[data-tooltip]::before,
+    .tooltip-anchor[data-tooltip]::after {
+      position: absolute;
+      z-index: 720;
+      left: 50%;
+      pointer-events: none;
+      opacity: 0;
+      transform: translate(-50%, -3px);
+      transition:
+        opacity 120ms ease,
+        transform 120ms ease;
+      transition-delay: 0ms;
+    }
+
+    .tooltip-anchor[data-tooltip]::before {
+      top: calc(100% + 4px);
+      width: 7px;
+      height: 7px;
+      border-top: 1px solid var(--border);
+      border-left: 1px solid var(--border);
+      background: var(--surface);
+      content: "";
+      transform: translate(-50%, -3px) rotate(45deg);
+    }
+
+    .tooltip-anchor[data-tooltip]::after {
+      top: calc(100% + 8px);
+      max-width: 220px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      color: var(--text);
+      background: var(--surface);
+      box-shadow: var(--elevation-2);
+      padding: 5px 8px;
+      content: attr(data-tooltip);
+      font-size: 11px;
+      font-weight: 650;
+      line-height: 1.2;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .tooltip-anchor[data-tooltip]:hover::before,
+    .tooltip-anchor[data-tooltip]:hover::after,
+    .tooltip-anchor[data-tooltip]:focus-visible::before,
+    .tooltip-anchor[data-tooltip]:focus-visible::after {
+      opacity: 1;
+      transform: translate(-50%, 0);
+      transition-delay: 280ms;
+    }
+
+    .tooltip-anchor[data-tooltip]:hover::before,
+    .tooltip-anchor[data-tooltip]:focus-visible::before {
+      transform: translate(-50%, 0) rotate(45deg);
+    }
+  }
+}
+
+
