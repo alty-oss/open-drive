@@ -33,6 +33,9 @@ The host directory `./storage` is mounted into the container at
 `/app/storage`. It contains the user files, the SQLite index, active upload
 chunks, and trash data.
 
+For a production VPS, including HTTPS, health checks, updates, backups,
+restoration, and troubleshooting, follow [`DEPLOYMENT.md`](DEPLOYMENT.md).
+
 ## Database direction
 
 SQLite remains the right default for the current single-server architecture:
